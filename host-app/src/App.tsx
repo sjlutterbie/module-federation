@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, useState } from 'react';
 
 import { MessageContext } from './Contexts';
 import { LocalContextConsumer } from './LocalContextConsumer';
@@ -7,8 +7,10 @@ import { LocalContextConsumer } from './LocalContextConsumer';
 const FederatedPage = React.lazy(() => import('page_app/FederatedPage'));
 
 export function App() {
+  const [message, setMessage] = useState('Host App Default Message');
+
   return (
-    <MessageContext.Provider value="Hello from HostApp!">
+    <MessageContext.Provider value={{ message, setMessage }}>
       <div>
         <p>Hello from HostApp!</p>
         <LocalContextConsumer />

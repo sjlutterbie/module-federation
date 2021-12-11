@@ -1,8 +1,10 @@
-import React, { Context } from 'react';
+import React from 'react';
 import { FederatedContextConsumer } from './FederatedContextConsumer';
+import { FederatedForm } from './FederatedForm';
+import { MessageContextType } from './types';
 
 type FederatedPageProps = {
-  MessageContext: Context<string>;
+  MessageContext: MessageContextType;
 };
 
 export default function FederatedPage(props: FederatedPageProps) {
@@ -12,6 +14,7 @@ export default function FederatedPage(props: FederatedPageProps) {
     <div>
       <p>Hello, I'm a Federated App!</p>
       <FederatedContextConsumer MessageContext={MessageContext} />
+      <FederatedForm MessageContext={MessageContext} />
     </div>
   );
 }

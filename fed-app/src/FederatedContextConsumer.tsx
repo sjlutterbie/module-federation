@@ -1,13 +1,14 @@
-import React, { Context, Suspense, useContext } from 'react';
+import React, { Suspense, useContext } from 'react';
+import { MessageContextType } from './types';
 
 type FederatedContextConsumerProps = {
-  MessageContext: Context<string>;
+  MessageContext: MessageContextType;
 };
 
 export function FederatedContextConsumer(props: FederatedContextConsumerProps) {
   const { MessageContext } = props;
 
-  const message = useContext(MessageContext);
+  const { message } = useContext(MessageContext);
 
   return (
     <Suspense fallback={'Loading...'}>

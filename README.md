@@ -3,14 +3,14 @@
 ## Introduction
 
 This repo contains two independent React SPAs, `host-app` and `page-app`,
-connected via Webpack's `Module Federation`. 
+connected via Webpack's `Module Federation`.
 
 `page-app` provides the React Component, `FederatedPage`, which takes
 `MessageContext` as a `prop`.
 
 `host-app` imports `page-app/FederatedPage`, providing it with `MessageContext`.
 Within `page-app`, the `FederatedContextConsumer` component displays the message
-provided via `MessageContext`. 
+provided via `MessageContext`.
 
 ## Getting started
 
@@ -43,4 +43,5 @@ both its own content AND `FederatedPage`. Notice that `FederatedPage` is renderi
 the message from the shared `MessageContext`.
 
 ## Next steps
-Extend `MessageContext` such that it can be updated from within `FederatedPage`.
+
+- Investigate Typescript support for Module Federation
