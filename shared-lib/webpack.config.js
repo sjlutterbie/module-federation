@@ -41,7 +41,7 @@ module.exports = {
   plugins: [
     new ModuleFederationPlugin({
       name: 'shared_lib',
-      filename: 'remoteEntry.js',
+      filename: 'shared_lib.registry.js',
       exposes: {
         './MessageContext': './src/MessageContext',
       },

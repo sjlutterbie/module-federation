@@ -3,7 +3,7 @@ import React from 'react';
 import { FederatedContextConsumer } from './FederatedContextConsumer';
 import { FederatedForm } from './FederatedForm';
 
-export function FederatedPage() {
+export default function FederatedPage() {
   return (
     <>
       <p>Hello, I'm a Federated App!</p>

@@ -38,10 +38,10 @@ module.exports = {
   plugins: [
     new ModuleFederationPlugin({
       name: 'host_app',
-      filename: 'remoteEntry.js',
+      filename: 'host_app.registry.js',
       remotes: {
-        page_app: 'page_app@http://localhost:8081/remoteEntry.js',
-        shared_lib: 'shared_lib@http://localhost:8082/remoteEntry.js',
+        fed_view: 'fed_view@http://localhost:8081/fed_view.registry.js',
+        shared_lib: 'shared_lib@http://localhost:8082/shared_lib.registry.js',
       },
       shared: {
         ...deps,
