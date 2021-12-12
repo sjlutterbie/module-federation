@@ -1,6 +1,6 @@
 const path = require('path');
-const HTMLWebpackPlugin = require('html-webpack-plugin');
 const { ModuleFederationPlugin } = require('webpack').container;
+const HTMLWebpackPlugin = require('html-webpack-plugin');
 const deps = require('./package.json').dependencies;
 
 module.exports = {
@@ -11,8 +11,11 @@ module.exports = {
   },
   mode: 'development',
   devtool: 'inline-source-map',
+  optimization: {
+    minimize: false,
+  },
   devServer: {
-    port: 8080,
+    port: 8082,
   },
   module: {
     rules: [
@@ -37,11 +40,10 @@ module.exports = {
   },
   plugins: [
     new ModuleFederationPlugin({
-      name: 'host_app',
+      name: 'shared_lib',
       filename: 'remoteEntry.js',
-      remotes: {
-        page_app: 'page_app@http://localhost:8081/remoteEntry.js',
-        shared_lib: 'shared_lib@http://localhost:8082/remoteEntry.js',
+      exposes: {
+        './MessageContext': './src/MessageContext',
       },
       shared: {
         ...deps,

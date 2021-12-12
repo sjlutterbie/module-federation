@@ -1,18 +1,10 @@
-import React, {
-  ChangeEventHandler,
-  FormEventHandler,
-  useContext,
-  useState,
-} from 'react';
-import { MessageContextType } from './types';
+import React, { ChangeEventHandler, FormEventHandler, useState } from 'react';
 
-type FederatedFormProps = {
-  MessageContext: MessageContextType;
-};
+// @ts-ignore
+import { useMessageContext } from 'shared_lib/MessageContext';
 
-export function FederatedForm(props: FederatedFormProps) {
-  const { MessageContext } = props;
-  const { message, setMessage } = useContext(MessageContext);
+export function FederatedForm() {
+  const { message, setMessage } = useMessageContext();
   const [localMessage, setLocalMessage] = useState(message);
 
   const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {

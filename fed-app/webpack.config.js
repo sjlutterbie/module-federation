@@ -42,6 +42,9 @@ module.exports = {
     new ModuleFederationPlugin({
       name: 'page_app',
       filename: 'remoteEntry.js',
+      remotes: {
+        shared_lib: 'shared_lib@http://localhost:8082/remoteEntry.js',
+      },
       exposes: {
         './FederatedPage': './src/FederatedPage',
       },

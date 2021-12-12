@@ -1,24 +1,22 @@
-import React, { Suspense, useState } from 'react';
-
-import { MessageContext } from './Contexts';
+import React, { Suspense } from 'react';
 import { LocalContextConsumer } from './LocalContextConsumer';
 
-//@ts-ignore
-const FederatedPage = React.lazy(() => import('page_app/FederatedPage'));
+// @ts-ignore
+import { MessageContextProvider } from 'shared_lib/MessageContext';
+// @ts-ignore
+import { FederatedPage } from 'page_app/FederatedPage';
 
 export function App() {
-  const [message, setMessage] = useState('Host App Default Message');
-
   return (
-    <MessageContext.Provider value={{ message, setMessage }}>
-      <div>
+    <Suspense fallback={'Loading...'}>
+      <MessageContextProvider>
         <p>Hello from HostApp!</p>
         <LocalContextConsumer />
         <hr />
         <Suspense fallback={'Loading...'}>
-          <FederatedPage MessageContext={MessageContext} />
+          <FederatedPage />
         </Suspense>
-      </div>
-    </MessageContext.Provider>
+      </MessageContextProvider>
+    </Suspense>
   );
 }
