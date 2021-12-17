@@ -1,37 +1,45 @@
 import React, {
-  Context,
+  ReactNode,
   createContext,
-  PropsWithChildren,
   useContext,
+  useMemo,
   useState,
 } from 'react';
 
-let _MessageContext: Context<{
+type MessageContextValue = {
   message: string;
-  setMessage: React.Dispatch<React.SetStateAction<string>>;
-}>;
-
-export function useMessageContext() {
-  return useContext(_MessageContext);
-}
-
-type MessageContextProviderProps = {
-  defaultMessage: string;
+  setMessage: (value: string) => void;
 };
 
-export function MessageContextProvider(
-  props: PropsWithChildren<MessageContextProviderProps>
-) {
-  const { children, defaultMessage = 'Default Federated Message' } = props;
-  const [message, setMessage] = useState(defaultMessage);
+console.log('create messageContext');
 
-  const MessageContext = createContext({ message, setMessage });
+export const messageContext = createContext<MessageContextValue>({
+  message: 'initial',
+  setMessage: () => undefined,
+});
 
-  _MessageContext = MessageContext;
+export function useMessageContext() {
+  return useContext(messageContext);
+}
 
-  return (
-    <MessageContext.Provider value={{ message, setMessage }}>
-      {children}
-    </MessageContext.Provider>
-  );
+type Props = {
+  children: ReactNode;
+  message: string;
+};
+
+export function MessageContextProvider(props: Props) {
+  const { children, message: messageProp } = props;
+
+  const [message, setMessage] = useState(messageProp);
+
+  const value = useMemo(() => {
+    const result: MessageContextValue = {
+      message,
+      setMessage,
+    };
+    return result;
+  }, [message, setMessage]);
+
+  const { Provider } = messageContext;
+  return <Provider value={value}>{children}</Provider>;
 }
