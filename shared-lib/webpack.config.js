@@ -15,7 +15,14 @@ module.exports = {
     minimize: false,
   },
   devServer: {
+    hot: 'only',
     port: 8082,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
+      'Access-Control-Allow-Headers':
+        'X-Requested-With, content-type, Authorization',
+    },
   },
   module: {
     rules: [
@@ -44,6 +51,7 @@ module.exports = {
       filename: 'shared_lib.registry.js',
       exposes: {
         './MessageContext': './src/MessageContext',
+        './AppConfigContext': './src/AppConfigContext',
       },
       shared: {
         ...deps,
@@ -57,6 +65,6 @@ module.exports = {
         },
       },
     }),
-    new HTMLWebpackPlugin({}),
+    new HTMLWebpackPlugin({ title: 'shared-lib' }),
   ],
 };

@@ -1,0 +1,11 @@
+{
+  "private": true,
+  "scripts": {
+    "install-all": "lerna exec -- yarn install",
+    "start": "lerna run --parallel start",
+    "start2": "lerna run --scope @shared-context/* --parallel start"
+  },
+  "devDependencies": {
+    "lerna": "3.22.1"
+  }
+}
